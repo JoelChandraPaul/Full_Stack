@@ -1,4 +1,7 @@
-﻿namespace NumberAnalyzer
+﻿using System;
+using System.Globalization;
+
+namespace NumberAnalyzer
 {
     internal class Program
     {
@@ -24,9 +27,8 @@
                     Console.WriteLine("Invalid input. Please enter a valid integer.");
                     continue;
                 }
-
-                EvenOrOdd(num);
-                PositiveOrNegative(num);
+                
+                NumberInfo(num);
 
                 Console.WriteLine(); 
             }
@@ -34,54 +36,29 @@
 
         static string GetInput()
         {
-            Console.WriteLine("Enter a number:\n Type q or exit to Stop the program");
+            Console.WriteLine("Enter a number:\nType q/exit to exit");
             return Console.ReadLine().Trim().ToLower();
         }
 
         static bool ShouldExit(string input)
         {
-            if (input == "q" || input == "exit")
-            {
-                return true;
-            }
-            return false;
+            return input == "q" || input == "exit";
         }
 
         static bool TryGetNumber(string input, out int number)
         {
-            if (int.TryParse(input, out number))
-            {
-                return true;
-            }
-            return false;
+           return int.TryParse(input, out number);
         }
 
-        static void EvenOrOdd(int num)
+        static void NumberInfo(int num)
         {
-            if(num%2 == 0)
-            {
-                Console.WriteLine($"{num} is Even");
-            }
-            else
-            {
-                Console.WriteLine($"{num} is Odd");
-            }
-        }
-
-        static void PositiveOrNegative(int num)
-        {
-            if(num > 0)
-            {
+          Console.WriteLine(num % 2 == 0 ? $"{num} is Even" : $"{num} is Odd");
+            if (num > 0)
                 Console.WriteLine($"{num} is Positive");
-            }
-            else if(num == 0)
-            {
+            else if (num == 0)
                 Console.WriteLine($"{num} is neither Positive nor Negative");
-            }
             else
-            {
                 Console.WriteLine($"{num} is Negative");
-            }
-        }
+          }
+        }   
     }
-}
